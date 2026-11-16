@@ -4,12 +4,12 @@
 
 ### English
 
-- **Lift to fs-components v0.0.23** (from v0.0.13): contract 0.2, dialogs / toast / states, Craft font rules, craft-labels, style tokens. No code of this program changed: it builds unchanged against the new API; what changes is the look that comes from fs-components (radii, fonts, dialogs). New in the lock: `fs-components-editor`, `-mf2`, `-words` and the `mf2` crates (crates.io); Blinc stays `fs-blinc-3.1`.
+- **Lift to fs-components v0.0.23** (from v0.0.13): contract 0.2, dialogs / toast / states, Craft font rules, craft-labels, style tokens. No code of this program changed: it builds unchanged against the new API. Visible in the file window: the file-type icons have a darker edge (fs-components 0.0.17, `icon_kind::sheet_edge`, at least 3:1 contrast); nothing else changes in the pictures. The Craft font rule (system mono when JetBrains Mono is not installed) does not show in fs-files, which shows the standard style. New in the lock: `fs-components-editor`, `-mf2`, `-words` and the `mf2` crates (crates.io); Blinc stays `fs-blinc-3.1`.
 - The workflows are pinned to fs-release v0.0.9 (commit `6ebd3f8`), no longer `@main`.
 
 ### Deutsch
 
-- **Lift auf fs-components v0.0.23** (von v0.0.13): Vertrag 0.2, Dialoge / Toast / Zustände, Craft-Schriftregeln, craft-labels, Stil-Tokens. Am Code dieses Programms ändert sich nichts: es baut unverändert gegen die neue API; sichtbar ändert sich, was aus fs-components kommt (Radien, Schriften, Dialoge). Neu im Lock: `fs-components-editor`, `-mf2`, `-words` und die `mf2`-Crates (crates.io); Blinc bleibt `fs-blinc-3.1`.
+- **Lift auf fs-components v0.0.23** (von v0.0.13): Vertrag 0.2, Dialoge / Toast / Zustände, Craft-Schriftregeln, craft-labels, Stil-Tokens. Am Code dieses Programms ändert sich nichts: es baut unverändert gegen die neue API. Sichtbar im Dateifenster: die Dateityp-Symbole haben einen dunkleren Rand (fs-components 0.0.17, `icon_kind::sheet_edge`, Mindestkontrast 3:1); sonst ändert sich in den Bildern nichts. Die Craft-Schriftregel (System-Mono, wenn JetBrains Mono nicht installiert ist) zeigt sich in fs-files nicht, das Programm zeigt den Standard-Stil. Neu im Lock: `fs-components-editor`, `-mf2`, `-words` und die `mf2`-Crates (crates.io); Blinc bleibt `fs-blinc-3.1`.
 - Die Workflows sind auf fs-release v0.0.9 (Commit `6ebd3f8`) gepinnt, nicht mehr `@main`.
 
 ## 0.0.10

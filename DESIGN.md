@@ -7,7 +7,7 @@ see a path or a backend. Contract: `files.capnp` in `fs-interfaces` (tag v0.0.19
 
 ## State
 
-Version 0.0.11 (lift to fs-components v0.0.23, see CHANGELOG); 0.0.10 was (the face of the file window is chosen in the View menu and kept; fs-components v0.0.13); 0.0.9 was: long calls of the file window run on a worker; 0.0.8 was (the file window is the standard window; fs-components v0.0.11, fs-interfaces v0.0.19; folders first; types by bytes, ending and text; see "Lift to fs-components v0.0.11"); 0.0.7 was: timeouts: no call to the server waits for ever; 0.0.6 was the Q0 migration: one Blinc place, version handshake, `--facet`, typing test; 0.0.5 was tagged but its release was red, left as it is; 0.0.4 was tagged but its release failed: `--version` was missing; window rebuilt on the generated Admin frontend; earlier: 0.6.0 tagged v0.6.0, header corrected 2026-11-08; 0.5.0 was: stage 1: local folder, stage 2: S3, stage 3: real names, stage 4: the server, 0.5.0: store identity, typed problem extensions, uploads paged in the store). Built on fs-objects v0.0.1, fs-interfaces v0.0.19 and fs-components v0.0.13 (git tags). Interface status: draft, provisional, consumers 0 of 2.
+Version 0.0.11 (lift to fs-components v0.0.23, see CHANGELOG); 0.0.10 was (the face of the file window is chosen in the View menu and kept; fs-components v0.0.13); 0.0.9 was: long calls of the file window run on a worker; 0.0.8 was (the file window is the standard window; fs-components v0.0.11, fs-interfaces v0.0.19; folders first; types by bytes, ending and text; see "Lift to fs-components v0.0.11"); 0.0.7 was: timeouts: no call to the server waits for ever; 0.0.6 was the Q0 migration: one Blinc place, version handshake, `--facet`, typing test; 0.0.5 was tagged but its release was red, left as it is; 0.0.4 was tagged but its release failed: `--version` was missing; window rebuilt on the generated Admin frontend; earlier: 0.6.0 tagged v0.6.0, header corrected 2026-11-08; 0.5.0 was: stage 1: local folder, stage 2: S3, stage 3: real names, stage 4: the server, 0.5.0: store identity, typed problem extensions, uploads paged in the store). Built on fs-objects v0.0.1, fs-interfaces v0.0.19 and fs-components v0.0.23 (git tags). Interface status: draft, provisional, consumers 0 of 2.
 
 | Area | State |
 |---|---|
@@ -239,7 +239,7 @@ wants remote backends needs the client side (`RemoteBackend`), not built; (7) a 
 
 ## Crates
 
-* `fs-objects` (v0.0.1), `fs-interfaces` (v0.0.19), `fs-components` (v0.0.13): git tags.
+* `fs-objects` (v0.0.1), `fs-interfaces` (v0.0.19), `fs-components` (v0.0.23): git tags.
 * `rustix` 1 (MIT OR Apache-2.0, Linux only, features `std` + `fs`): `renameat2` with `RENAME_NOREPLACE`, the atomic no-replace rename that `std` lacks. No C code with its default backend, already in the lock file through other crates.
 * `blake3` 1.8 (CC0-1.0 OR Apache-2.0): checksums, with the `pure` feature (no C / assembly). Fast enough for a first version.
 * `infer` 0.22 (MIT): media type from the first bytes when the caller gives none; pure Rust, no dependencies.
@@ -263,7 +263,7 @@ file and a folder IS its real name (not derived). In the core `Error::problem()`
 
 ## Type descriptions and the window (ADR 0066, Thread R, 2026-11-10)
 
-Types (crate `fs-files-types`, `DescribesType` of `fs-types` from `fs-interfaces` **v0.0.19**, the one `fs-admin-frontend` v0.0.13 (`fs-components`) uses; reported by `Files.types @7` of `files.capnp`):
+Types (crate `fs-files-types`, `DescribesType` of `fs-types` from `fs-interfaces` **v0.0.19**, the one `fs-admin-frontend` v0.0.23 (`fs-components`) uses; reported by `Files.types @7` of `files.capnp`):
 
 | Type | Standard | Why |
 |---|---|---|
@@ -340,7 +340,7 @@ Windows and the tests say that. Until `fs-interfaces` is tagged with the transpo
 
 ## Q0 migration (0.0.6, 2026-11-11)
 
-* **Blinc in one place.** No `blinc*` dependency, no `[patch]`/`[replace]`; the program hangs on `fs-components` only (one tag, now v0.0.13) (Blinc arrives through it; `fs_components::blinc` re-exports it, this code names no `blinc_*`). `.fs-rules.toml` has `blinc = "components-only"`; `check_blinc` of fs-release checks it. `fs-components-map` is not needed by this program.
+* **Blinc in one place.** No `blinc*` dependency, no `[patch]`/`[replace]`; the program hangs on `fs-components` only (one tag, now v0.0.23) (Blinc arrives through it; `fs_components::blinc` re-exports it, this code names no `blinc_*`). `.fs-rules.toml` has `blinc = "components-only"`; `check_blinc` of fs-release checks it. `fs-components-map` is not needed by this program.
 * **Version handshake** (fs-interfaces DESIGN, "Version handshake"). The server answers `Control.version` (`run_until_signal_as`, `ServerIdentity::new("fs-files", version)`). The window connects with `FilesRemote::matching(socket, CommandStarter(current_exe, serve [--socket S] --lease L))`, which calls `connect_matching`: a server of this version is used, none is started, one of another version is stopped and replaced. A `HandshakeError` is kept as `BackendError::Handshake(text)`; the window opens anyway (descriptions from `fs-files-types` when the server cannot say them), every list shows the text and "Try again" calls `Backend::reconnect` = `FilesRemote::reconnect`. Never a black window. `FilesRemote::connect` (plain, no check, no start) stays for the tests. The server started by a window still ends when no window holds the lease. The log file of a server that stops at once is gone (a detached server has no stderr); the handshake error says it could not start. Tests: `crates/fs-files-app/tests/handshake*.rs`.
 * **`--facet NAME`** is read by the one parser of fs-interfaces (`rpc::parse_facet`) in the window and in the server (`ServerOptions`); a name this program does not have is refused (`fs-files-types` `FACETS`: `files` = File, Folder, StorageBackend; `gallery` = Picture, Album). The server serves every type whatever the facet; the facet is the window's view.
 * **`--version`** prints `fs-files <version>` (release smoke test).
