@@ -1,6 +1,18 @@
 # Changelog
 
-## 0.0.10 (in progress)
+## 0.0.11 (in progress)
+
+### English
+
+- **Lift to fs-components v0.0.23** (from v0.0.13): contract 0.2, dialogs / toast / states, Craft font rules, craft-labels, style tokens. No code of this program changed: it builds unchanged against the new API; what changes is the look that comes from fs-components (radii, fonts, dialogs). New in the lock: `fs-components-editor`, `-mf2`, `-words` and the `mf2` crates (crates.io); Blinc stays `fs-blinc-3.1`.
+- The workflows are pinned to fs-release v0.0.9 (commit `6ebd3f8`), no longer `@main`.
+
+### Deutsch
+
+- **Lift auf fs-components v0.0.23** (von v0.0.13): Vertrag 0.2, Dialoge / Toast / Zustände, Craft-Schriftregeln, craft-labels, Stil-Tokens. Am Code dieses Programms ändert sich nichts: es baut unverändert gegen die neue API; sichtbar ändert sich, was aus fs-components kommt (Radien, Schriften, Dialoge). Neu im Lock: `fs-components-editor`, `-mf2`, `-words` und die `mf2`-Crates (crates.io); Blinc bleibt `fs-blinc-3.1`.
+- Die Workflows sind auf fs-release v0.0.9 (Commit `6ebd3f8`) gepinnt, nicht mehr `@main`.
+
+## 0.0.10
 
 ### English
 
