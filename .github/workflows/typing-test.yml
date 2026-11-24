@@ -27,14 +27,14 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y --no-install-recommends pkg-config libxkbcommon-dev libwayland-dev libfontconfig1-dev libssl-dev
-      - uses: FreeSynergy-Net/fs-release/actions/setup-rust@9eed5c95eb7311f2b68266a012ec778f51e3ac38 # v0.0.9
+      - uses: FreeSynergy-Net/fs-release/actions/setup-rust@e0aa772a12b91f8a37846b4efef5f44a963a6c47 # v0.0.9
         with:
           cache-key: typing-test
       - name: Build the window (debug, with the read-only text access of the test; the feature is refused in a release build)
         run: cargo build --locked -p fs-files --features test-access
       - name: Typing test of the file window (the standard window)
         id: files
-        uses: FreeSynergy-Net/fs-release/actions/typing-test@9eed5c95eb7311f2b68266a012ec778f51e3ac38 # v0.0.9
+        uses: FreeSynergy-Net/fs-release/actions/typing-test@e0aa772a12b91f8a37846b4efef5f44a963a6c47 # v0.0.9
         with:
           app-binary: target/debug/fs-files
           app-args: "--size 1000x640"
@@ -42,7 +42,7 @@ jobs:
           name: fs-files
           runs: 3
       - name: Typing test of the Admin frontend (--admin)
-        uses: FreeSynergy-Net/fs-release/actions/typing-test@9eed5c95eb7311f2b68266a012ec778f51e3ac38 # v0.0.9
+        uses: FreeSynergy-Net/fs-release/actions/typing-test@e0aa772a12b91f8a37846b4efef5f44a963a6c47 # v0.0.9
         with:
           app-binary: target/debug/fs-files
           app-args: "--size 1000x640 --admin"
